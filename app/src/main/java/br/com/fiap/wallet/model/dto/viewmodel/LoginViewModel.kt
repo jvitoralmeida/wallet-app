@@ -20,6 +20,10 @@ class LoginViewModel constructor(private val repository: LoginRepository) : View
         val request = repository.login(login)
         request.enqueue(object : Callback<ResponseBody>{
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if(response.code() != 200) {
+                    liveDataSignUp.postValue("não autorizado")
+                    return
+                }
                 liveDataSignUp.postValue(response.headers().get("Authorization"))
             }
 

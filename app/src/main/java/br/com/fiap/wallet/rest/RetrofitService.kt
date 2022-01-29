@@ -8,6 +8,7 @@ import okhttp3.internal.http.HttpHeaders
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface RetrofitService {
@@ -16,7 +17,7 @@ interface RetrofitService {
     fun signUp(signUp: SignUp): Call<SignUpDTO>
 
     @POST("/login")
-    fun login(loginDTO: LoginDTO): Call<ResponseBody>
+    fun login(@Body loginDTO: LoginDTO): Call<ResponseBody>
 
     companion object {
         private const val BASE_URL = "http://3.140.201.92"
@@ -27,7 +28,7 @@ interface RetrofitService {
                 .build().create(RetrofitService::class.java)
         }
 
-        fun getnstance(): RetrofitService {
+        fun getInstance(): RetrofitService {
             return retrofitService
         }
     }
